@@ -12,14 +12,25 @@ import Form from './components/form';
 //     )
 // }
 
-class App extends React.Component{
-    render(){
-        return(
-            <div className = 'app-wrapper'>
-                <Form />
+class App extends React.Component {
+    
+    getWeather = async (e) => {
+        e.preventDefault();
+        const city = e.target.elements.city.value;
+        const api_url = await
+            fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=00c84f1f2e90aadb38b5b3daae21492f`);
+        const data = await api_url.json();
+        console.log(data);
+
+    }
+    render() {
+        return (
+            <div >
+                
+                <Form weatherMethod={this.getWeather} />
                 
             </div>
-        )
+        );
     }
 }
 export default App;
