@@ -1,16 +1,6 @@
 import React from 'react';
-import Weather from './components/weather';
-import Info from './components/info';
-import Form from './components/form';
-
-// const App = () => {
-//     return(
-//         <div className = 'app-wrapper'>
-//             <Form />
-//             <Weather />
-//         </div>
-//     )
-// }
+import Weather from './components/Weather';
+import Form from './components/Form';
 
 class App extends React.Component {
 
@@ -31,14 +21,14 @@ class App extends React.Component {
                 fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=7e24578ea405cc1bc51c26e2e18df599`);
             const data = await api_url.json();
 
-            var tempC = (data.main.temp - 32) *5 /9;
+            var tempC = (data.main.temp - 273.1).toFixed(0);
 
             
             this.setState({
                 temp: tempC,
                 city: data.name,
                 country: data.sys.country,
-                pressure: data.main.pressure,
+                pressure: (data.main.pressure * 0.75006375541921).toFixed(0),
                 error: ""
             });
         }
